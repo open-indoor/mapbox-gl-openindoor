@@ -1,0 +1,7 @@
+.mapboxgl-ctrl-openindoor button {
+  min-width: 30px;
+  width: 100%;
+}
+.mapboxgl-ctrl-openindoor  .mapboxgl-ctrl-active {
+  background-color: #b7b7b7;
+}

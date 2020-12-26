@@ -1,0 +1,41 @@
+{
+  "name": "mapbox-gl-openindoor",
+  "version": "0.2.5",
+  "description": "Integrate indoor= into your mapbox-gl.js map.",
+  "repository": "https://github.com/openindoor/mapbox-gl-openindoor",
+  "author": "OpenIndoor",
+  "license": "BSD",
+  "main": "dist/mapbox-gl-openindoor.cjs.js",
+  "module": "dist/mapbox-gl-openindoor.esm.js",
+  "browser": "dist/mapbox-gl-openindoor.umd.min.js",
+  "scripts": {
+    "dev": "rollup --config --watch",
+    "build": "rollup --config",
+    "doc": "documentation readme src/index.js --section=API"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@mapbox/spritezero-cli": "https://github.com/francois2metz/spritezero-cli",
+    "@rollup/plugin-babel": "^5.0.0",
+    "@rollup/plugin-commonjs": "^13.0",
+    "@rollup/plugin-node-resolve": "^8.1",
+    "babel-jest": "^26.0",
+    "documentation": "^13.0.0",
+    "jest": "^26.0",
+    "rollup": "^2.7.6",
+    "rollup-plugin-terser": "^6.0"
+  },
+  "dependencies": {
+    "array-equal": "^1.0.0",
+    "debounce": "^1.2.0"
+  }
+}

@@ -1,0 +1,10 @@
+:80 {
+
+    root * /data/www/dist
+    file_server browse
+
+    log {
+        level DEBUG
+    }
+
+}
