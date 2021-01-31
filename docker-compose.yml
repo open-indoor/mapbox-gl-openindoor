@@ -1,0 +1,14 @@
+version: "3.6"
+services:
+
+  mapbox-gl-openindoor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: openindoor/mapbox-gl-openindoor
+    environment:
+      NPM_TOKEN: "${NPM_TOKEN}"
+    working_dir: /mapbox-gl-openindoor
+    volumes:
+    - .:/mapbox-gl-openindoor
+    command: bash -c "./build.sh"
