@@ -1,7 +1,11 @@
 :80 {
 
-    root * /data/www/dist
-    file_server browse
+    route * {
+     	header Access-Control-Allow-Origin *
+    	header Access-Control-Request-Method GET
+        root * /data/www/dist
+        file_server browse
+    }
 
     log {
         level DEBUG

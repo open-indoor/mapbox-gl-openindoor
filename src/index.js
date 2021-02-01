@@ -26,7 +26,8 @@ export default class OpenIndoor {
       //   url: 'https://api.openindoor.io/tileserver/data/france.json'
       // },
       layerId: "osm-indoor",
-      layers
+      layersSrc: "https://app.openindoor.io/style/indoor/indoorLayers.json",
+      level: 0
     };
 
     const opts = { ...defaultOpts, ...options };
@@ -35,7 +36,14 @@ export default class OpenIndoor {
     this.layerId = opts.layerId;
     // this.source = opts.source;
     this.apiKey = opts.apiKey;
-    this.layers = opts.layers;
+    this.layers = undefined
+    fetch(opts.layersSrc)
+    .then(response => response.json())
+    .then(response => this.layers = response)
+    .catch(error => console.log("Error : " + error));
+
+    
+
     this.levels = [];
     this.level = ("level" in opts) ? opts.level : '0';
     console.log("opts:", opts);
@@ -135,6 +143,10 @@ export default class OpenIndoor {
   }
 
   _updateFilters() {
+    if (this.layers === undefined) {
+      return;
+    }
+
     this.layers.forEach((layer) => {
       // console.log("this.level 02:", this.level);
       let levelFilter = [

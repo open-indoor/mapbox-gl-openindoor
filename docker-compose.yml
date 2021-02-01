@@ -1,7 +1,7 @@
 version: "3.6"
 services:
 
-  mapbox-gl-openindoor:
+  mapbox-gl-openindoor-build:
     build:
       context: .
       dockerfile: Dockerfile
@@ -11,4 +11,19 @@ services:
     working_dir: /mapbox-gl-openindoor
     volumes:
     - .:/mapbox-gl-openindoor
-    command: bash -c "./build.sh"
+    entrypoint: bash -c
+    command:
+    - |
+      cd /mapbox-gl-openindoor
+      yarn install --frozen-lockfile 
+      yarn build
+      # yarn publish
+
+  mapbox-gl-openindoor-run:
+    image: caddy:2.3.0-alpine
+    volumes:
+    - ./Caddyfile:/etc/caddy/Caddyfile
+    - .:/data/www/dist
+    ports:
+    - "8093:80"
+

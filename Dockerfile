@@ -1,5 +1,5 @@
 ################### MAPBOX-GL-INDOOR BUILDER #######
-FROM node:15-alpine as builder
+FROM node:15-alpine
 
 RUN apk add --update-cache \
     git \
@@ -14,3 +14,5 @@ RUN apk add --update-cache \
     && rm -rf /var/cache/apk/*
 
 ENV NPM_TOKEN
+
+ENTRYPOINT /bin/bash -c
