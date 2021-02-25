@@ -14,12 +14,14 @@ env:
 
 jobs:
   setup-release-publish:
-    name: Setup, Build, Publish
+    name: Build and release docker image
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        token: ${{ github.token }}
 
     # Login to Docker Hub using helper
     -  name: Login to Docker Hub
@@ -34,12 +36,37 @@ jobs:
         #Pull the image to save the build time
         docker build \
           --tag "$IMAGE":"${GITHUB_REF##*/}" \
+          --build-arg NPM_TOKEN=${{ secrets.NPM_TOKEN }} \
           .
 
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
         docker push "$IMAGE":"${GITHUB_REF##*/}"
+
+  release-npm:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: fregante/setup-git-user@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+        always-auth: true
+        #registry-url: 'https://registry.npmjs.org'
+    - run: yarn install
+    - run: yarn build
+    - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+    - run: yarn publish --new-version "${GITHUB_REF##*/}"
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   deploy:
     name: Deploy
