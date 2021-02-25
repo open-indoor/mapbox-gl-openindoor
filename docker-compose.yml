@@ -7,17 +7,22 @@ services:
       dockerfile: Dockerfile
     image: openindoor/mapbox-gl-openindoor
     environment:
-      NPM_TOKEN: "${NPM_TOKEN}"
+    - NPM_TOKEN="${NPM_TOKEN}"
+    - VERSION="1.0.0"
     working_dir: /mapbox-gl-openindoor
     volumes:
     - .:/mapbox-gl-openindoor
     entrypoint: bash -c
     command:
     - |
-      cd /mapbox-gl-openindoor
+      set -e
+      set -x
+      env
+      echo ${VERSION}
+      sed -i 's/\("version": "\).*"/\1'${VERSION}'"/g' package.json
       yarn install --frozen-lockfile 
       yarn build
-      # yarn publish
+      yarn publish
 
   mapbox-gl-openindoor-run:
     image: caddy:2.3.0-alpine

@@ -5,12 +5,12 @@ import LevelControl from './level_control';
 import { layers } from './layers';
 
 /**
- * Load the indoor= source and layers in your map.
+ * Load the openindoor source and layers in your map.
  * @param {object} map the mapbox-gl instance of the map
  * @param {object} options
  * @param {source} [options.source] Override the default tiles URL (https://tiles.openindoor.org/).
  * @param {string} [options.apiKey] The API key if you use the default tile URL (get your free key at [openindoor.com](https://openindoor.com)).
- * @param {array} [options.layers] The layers to be used to style indoor= tiles.
+ * @param {array} [options.layers] The layers to be used to style openindoor tiles.
  * @property {string} level The current level displayed
  * @property {array} levels  The levels that can be displayed in the current view
  * @fires OpenIndoor#levelschange
@@ -238,7 +238,9 @@ export default class OpenIndoor {
   _updateLevels() {
     if (this.map.isSourceLoaded(this.sourceId)) {
       const features = this.map.querySourceFeatures(this.sourceId, { sourceLayer: this.layerId });
-      console.log('features to detect levels:', features)
+      console.log('sourceId:', this.sourceId);
+      console.log('layerId:', this.layerId);
+      console.log('features to detect levels:', features);
       // for (let feat in features) {
       //   if (('properties' in feat) && ('level' in feat['properties'])) {
       //     console.log('level: ' + feat['properties']['level'])

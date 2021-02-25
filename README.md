@@ -19,3 +19,29 @@ See:
 ## Instances
 
 This mapbox plugin is used in main OpenIndoor project, available here: https://app.openindoor.io
+
+
+## Dev side
+
+### Build
+
+```
+docker-compose up mapbox-gl-openindoor-build
+```
+
+### Test
+
+```
+mapbox-gl-openindoor-run
+```
+Then in web browser: http://localhost:8093
+
+### Deploy
+
+This project rely on github actions to be deployed
+
+For local actions:
+
+```
+
+```
