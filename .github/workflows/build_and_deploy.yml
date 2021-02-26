@@ -34,6 +34,7 @@ jobs:
         #Pull the image to save the build time
         docker build \
           --tag "$IMAGE":"$GITHUB_SHA" \
+          --build-arg NPM_TOKEN=${{ secrets.NPM_TOKEN }} \
           .
 
     # Push the Docker image to Google Container Registry

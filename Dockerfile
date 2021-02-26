@@ -13,6 +13,6 @@ RUN apk add --update-cache \
     util-linux \
     && rm -rf /var/cache/apk/*
 
-ENV NPM_TOKEN
+ARG NPM_TOKEN
 
 ENTRYPOINT /bin/bash -c
