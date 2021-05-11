@@ -1,17 +1,17 @@
 version: "3.6"
 services:
 
-  mapbox-gl-openindoor-build:
+  maplibre-gl-openindoor-build:
     build:
       context: .
       dockerfile: Dockerfile
-    image: openindoor/mapbox-gl-openindoor
+    image: openindoor/maplibre-gl-openindoor
     environment:
     - NPM_TOKEN="${NPM_TOKEN}"
     - VERSION="1.0.0"
-    working_dir: /mapbox-gl-openindoor
+    working_dir: /maplibre-gl-openindoor
     volumes:
-    - .:/mapbox-gl-openindoor
+    - .:/maplibre-gl-openindoor
     entrypoint: bash -c
     command:
     - |
@@ -22,9 +22,9 @@ services:
       sed -i 's/\("version": "\).*"/\1'${VERSION}'"/g' package.json
       yarn install --frozen-lockfile 
       yarn build
-      yarn publish
+      # yarn publish
 
-  mapbox-gl-openindoor-run:
+  maplibre-gl-openindoor-run:
     image: caddy:2.3.0-alpine
     volumes:
     - ./Caddyfile:/etc/caddy/Caddyfile

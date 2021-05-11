@@ -1,4 +1,4 @@
-# mapbox-gl-openindoor
+# maplibre-gl-openindoor
 
 ## License and fork
 
@@ -18,7 +18,7 @@ See:
 
 ## Instances
 
-This mapbox plugin is used in main OpenIndoor project, available here: https://app.openindoor.io
+This maplibre plugin is used in main OpenIndoor project, available here: https://app.openindoor.io
 
 
 ## Dev side
@@ -26,13 +26,13 @@ This mapbox plugin is used in main OpenIndoor project, available here: https://a
 ### Build
 
 ```
-docker-compose up mapbox-gl-openindoor-build
+docker-compose up maplibre-gl-openindoor-build
 ```
 
 ### Test
 
 ```
-mapbox-gl-openindoor-run
+maplibre-gl-openindoor-run
 ```
 Then in web browser: http://localhost:8093
 

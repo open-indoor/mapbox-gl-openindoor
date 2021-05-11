@@ -1,4 +1,4 @@
-################### MAPBOX-GL-INDOOR BUILDER #######
+################### MAPLIBRE-GL-INDOOR BUILDER #######
 FROM node:15-alpine
 
 RUN apk add --update-cache \

@@ -6,7 +6,7 @@ import { layers } from './layers';
 
 /**
  * Load the openindoor source and layers in your map.
- * @param {object} map the mapbox-gl instance of the map
+ * @param {object} map the maplibre-gl instance of the map
  * @param {object} options
  * @param {source} [options.source] Override the default tiles URL (https://tiles.openindoor.org/).
  * @param {string} [options.apiKey] The API key if you use the default tile URL (get your free key at [openindoor.com](https://openindoor.com)).
@@ -25,24 +25,24 @@ export default class OpenIndoor {
       //   type: 'vector',
       //   url: 'https://api.openindoor.io/tileserver/data/france.json'
       // },
-      layerId: "osm-indoor",
-      layersSrc: "https://app.openindoor.io/style/indoor/indoorLayers.json",
+      // layerId: "osm-indoor",
+      layerId: undefined,
+      // layers: "https://app.openindoor.io/style/indoor/indoorLayers.json",
       level: 0
     };
 
     const opts = { ...defaultOpts, ...options };
     this.map = map;
-    this.sourceId = opts.sourceId;
+    this.source = opts.source;
     this.layerId = opts.layerId;
+    this.layers = opts.layers;
     // this.source = opts.source;
-    this.apiKey = opts.apiKey;
-    this.layers = undefined
-    fetch(opts.layersSrc)
-    .then(response => response.json())
-    .then(response => this.layers = response)
-    .catch(error => console.log("Error : " + error));
-
-    
+    // this.apiKey = opts.apiKey;
+    // this.layers = undefined
+    // fetch(opts.layersSrc)
+    // .then(response => response.json())
+    // .then(response => this.layers = response)
+    // .catch(error => console.log("Error : " + error));
 
     this.levels = [];
     this.level = ("level" in opts) ? opts.level : '0';
@@ -146,7 +146,7 @@ export default class OpenIndoor {
     if (this.layers === undefined) {
       return;
     }
-
+    console.log('this.layers:', this.layers)
     this.layers.forEach((layer) => {
       // console.log("this.level 02:", this.level);
       let levelFilter = [
@@ -236,8 +236,10 @@ export default class OpenIndoor {
   }
 
   _updateLevels() {
+    console.log('updateLevels')
     if (this.map.isSourceLoaded(this.sourceId)) {
-      const features = this.map.querySourceFeatures(this.sourceId, { sourceLayer: this.layerId });
+      // const features = this.map.querySourceFeatures(this.sourceId, { sourceLayer: this.layerId });
+      const features = this.map.querySourceFeatures(this.sourceId);
       console.log('sourceId:', this.sourceId);
       console.log('layerId:', this.layerId);
       console.log('features to detect levels:', features);

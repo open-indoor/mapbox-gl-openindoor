@@ -3,7 +3,7 @@ kind: Kustomization
 commonLabels:
   app: openindoor
 images:
-  - name: openindoor/mapbox-gl-openindoor
+  - name: openindoor/maplibre-gl-openindoor
     newTag: latest
 resources:
-- mapbox-gl-openindoor.yaml
+- maplibre-gl-openindoor.yaml

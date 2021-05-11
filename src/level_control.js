@@ -17,6 +17,7 @@ export default class LevelControl {
   }
 
   _refresh() {
+    console.log('refresh')
     this.$el.innerHTML = '';
     // if (this.openindoor.levels.length === 1) {
     //   return;
